@@ -9,7 +9,7 @@
 
 
     <ImageView
-        android:id="@+id/myImageView"
+        android:id="@+id/firstImageView"
         android:layout_width="342dp"
         android:layout_height="233dp"
         android:src="@drawable/icon"
@@ -31,7 +31,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toEndOf="@+id/myImageView"
+        app:layout_constraintStart_toEndOf="@+id/firstImageView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -46,7 +46,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.542"
-        app:layout_constraintStart_toEndOf="@+id/myImageView"
+        app:layout_constraintStart_toEndOf="@+id/firstImageView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.374" />
 
@@ -62,7 +62,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.542"
-        app:layout_constraintStart_toEndOf="@+id/myImageView"
+        app:layout_constraintStart_toEndOf="@+id/firstImageView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.564" />
 
@@ -92,7 +92,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/editTextPassword"
         app:layout_constraintHorizontal_bias="0.882"
-        app:layout_constraintStart_toEndOf="@+id/myImageView"
+        app:layout_constraintStart_toEndOf="@+id/firstImageView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.845" />
 
