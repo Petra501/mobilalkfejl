@@ -12,6 +12,7 @@
     <string name="type">Típus</string>
     <string name="buyer">Vásárló</string>
     <string name="seller">Eladó</string>
+    <string name="guest">Vendég mód</string>
     <string-array name="phoneType">
         <item>Mobil</item>
         <item>Munkahelyi</item>

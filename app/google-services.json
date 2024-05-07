@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "42539546354",
+    "project_id": "bookshop-e70c5",
+    "storage_bucket": "bookshop-e70c5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:42539546354:android:8016255efc2edbe82c426b",
+        "android_client_info": {
+          "package_name": "com.example.konyvesbolt"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApXrITSoUUYkAe4-kr0z2pLkIGhLg7wmM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
