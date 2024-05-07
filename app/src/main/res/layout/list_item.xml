@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <ImageView
+            android:id="@+id/itemImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"/>
+    
+        <TextView
+            android:id="@+id/itemTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/itemImage"
+            android:padding="8dp"
+            android:text="@string/itemTitle"
+            android:textColor="@color/black"/>
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            style="@android:style/Widget.DeviceDefault.Light.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/itemTitleTextView"
+            android:layout_marginTop="0dp"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:layout_marginStart="8dp" />
+
+        <TextView
+            android:id="@+id/subtitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ratingBar"
+            android:padding="8dp"
+            android:text="@string/subtitle"/>
+
+        <TextView
+            android:id="@+id/prizeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/subtitleTextView"
+            android:layout_marginBottom="12dp"
+            android:padding="8dp"
+            android:text="Ár"
+            android:textColor="@color/red"
+            android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:id="@+id/addToCartButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/prizeTextView"
+            android:text="@string/addToChart"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

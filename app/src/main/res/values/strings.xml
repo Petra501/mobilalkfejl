@@ -13,6 +13,9 @@
     <string name="buyer">Vásárló</string>
     <string name="seller">Eladó</string>
     <string name="guest">Vendég mód</string>
+    <string name="itemTitle">Ez item cím</string>
+    <string name="subtitle">Ez leírás</string>
+    <string name="addToChart">Kosárba</string>
     <string-array name="phoneType">
         <item>Mobil</item>
         <item>Munkahelyi</item>
