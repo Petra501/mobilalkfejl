@@ -2,6 +2,7 @@ package com.example.konyvesbolt;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ import android.widget.Spinner;
 
 public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private static final String CLASS = RegisterActivity.class.getName();
+    private static final int KEY = 44;
     private static final String PREFERENCE = RegisterActivity.class.getPackage().toString();
     private SharedPreferences preferences;
 
@@ -88,6 +90,13 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
        Log.i(CLASS, "Regisztrált: " + userName + ", Email: " + userEmail + ", tel.típus: " + phoneType + ", telefon: " + phone + ", típus: " + userType);
         //TODO: A regisztrációs funkcionalitást meg kellene valósítani egyszer.
+        startShoplist();
+    }
+
+    private void startShoplist(){
+        Intent intent = new Intent(this, ShopListActivity.class);
+        intent.putExtra("KEY", KEY);
+        startActivity(intent);
     }
 
     @Override
