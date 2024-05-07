@@ -10,4 +10,11 @@
     <string name="loginString">A böngészéshez lépj be!</string>
     <string name="phone">Telefon</string>
     <string name="type">Típus</string>
+    <string-array name="phoneType">
+        <item>Mobil</item>
+        <item>Munkahelyi</item>
+        <item>Otthoni</item>
+        <item>Elsődleges</item>
+        <item>Személyhívó</item>
+    </string-array>
 </resources>
