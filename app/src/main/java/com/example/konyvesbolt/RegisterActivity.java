@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 
 public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -21,7 +23,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     EditText passwordEditText;
     EditText passwordAgainEditText;
     EditText phoneEditText;
-   // EditText typeEditText;
+   RadioGroup userTypeGroup;
     Spinner phoneSpinner;
 
     @Override
@@ -41,7 +43,8 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         passwordAgainEditText = findViewById(R.id.passwordAgainEditText);
         phoneEditText = findViewById(R.id.phoneEditText);
         phoneSpinner = findViewById(R.id.phoneSpinner);
-        //typeEditText = findViewById(R.id.typeEditText);
+        userTypeGroup = findViewById(R.id.userTypeGroup);
+        userTypeGroup.check(R.id.buyerRadioButton);
 
         preferences = getSharedPreferences(PREFERENCE, MODE_PRIVATE);
         String userName = preferences.getString("userName", "");
@@ -73,7 +76,9 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         String phone = phoneEditText.getText().toString();
         String phoneType = phoneSpinner.getSelectedItem().toString();
 
-        //String type = typeEditText.getText().toString();
+        int checkedId = userTypeGroup.getCheckedRadioButtonId();
+        RadioButton radioButton = userTypeGroup.findViewById(checkedId);
+        String userType = radioButton.getText().toString();
 
         if (!password.equals(passwordAgain)){
             Log.e(CLASS, "A jelszó és megerősítése nem egyezik!");
@@ -81,7 +86,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         }
 
 
-       // Log.i(CLASS, "Regisztrált: " + userName + ", Email: " + userEmail + ", telefon: " + phone + ", típus: " + type);
+       Log.i(CLASS, "Regisztrált: " + userName + ", Email: " + userEmail + ", tel.típus: " + phoneType + ", telefon: " + phone + ", típus: " + userType);
         //TODO: A regisztrációs funkcionalitást meg kellene valósítani egyszer.
     }
 
@@ -124,7 +129,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String selectedPhoneItem = parent.getItemAtPosition(position).toString();
-        Log.i(CLASS, selectedPhoneItem);
+        //Log.i(CLASS, selectedPhoneItem);
     }
 
     @Override
