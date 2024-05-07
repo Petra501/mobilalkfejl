@@ -1,5 +1,6 @@
 package com.example.konyvesbolt;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -13,12 +14,19 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private static final String CLASS = RegisterActivity.class.getName();
     private static final int KEY = 44;
     private static final String PREFERENCE = RegisterActivity.class.getPackage().toString();
     private SharedPreferences preferences;
+    private FirebaseAuth auth;
 
     EditText userNameEditText;
     EditText userEmailEditText;
@@ -49,10 +57,10 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         userTypeGroup.check(R.id.buyerRadioButton);
 
         preferences = getSharedPreferences(PREFERENCE, MODE_PRIVATE);
-        String userName = preferences.getString("userName", "");
+        String userEmail = preferences.getString("userEmail", "");
         String password = preferences.getString("password", "");
 
-        userNameEditText.setText(userName);
+        userEmailEditText.setText(userEmail);
         passwordEditText.setText(password);
         passwordAgainEditText.setText(password);
 
@@ -61,6 +69,8 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         phoneSpinner.setAdapter(adapter);
+
+        auth = FirebaseAuth.getInstance();
 
         Log.i(CLASS, "onCreate");
     }
@@ -88,14 +98,25 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         }
 
 
-       Log.i(CLASS, "Regisztrált: " + userName + ", Email: " + userEmail + ", tel.típus: " + phoneType + ", telefon: " + phone + ", típus: " + userType);
-        //TODO: A regisztrációs funkcionalitást meg kellene valósítani egyszer.
-        startShoplist();
+       //Log.i(CLASS, "Regisztrált: " + userName + ", Email: " + userEmail + ", tel.típus: " + phoneType + ", telefon: " + phone + ", típus: " + userType);
+
+        auth.createUserWithEmailAndPassword(userEmail, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    Log.d(CLASS, "A felhasználó sikeresen regisztrálva");
+                    startShoplist();
+                } else {
+                    Log.d(CLASS, "A felhasználó regisztrálása sikertelen");
+                    Toast.makeText(RegisterActivity.this, "A felhasználó regisztrálása sikertelen: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
     private void startShoplist(){
         Intent intent = new Intent(this, ShopListActivity.class);
-        intent.putExtra("KEY", KEY);
+        //intent.putExtra("KEY", KEY);
         startActivity(intent);
     }
 

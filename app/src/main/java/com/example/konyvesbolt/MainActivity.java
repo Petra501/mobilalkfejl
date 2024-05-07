@@ -1,5 +1,6 @@
 package com.example.konyvesbolt;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -8,14 +9,21 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
     private static final String CLASS = MainActivity.class.getName();
     private static final String PREFERENCE = MainActivity.class.getPackage().toString();
     private SharedPreferences preferences;
+    private FirebaseAuth auth;
     private static final int KEY = 44;
 
-    EditText userNameEditText;
+    EditText userEmailEditText;
     EditText passwordEditText;
 
 
@@ -25,20 +33,41 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        userNameEditText = findViewById(R.id.editTextUserName);
+        userEmailEditText = findViewById(R.id.editTextUserName);
         passwordEditText = findViewById(R.id.editTextPassword);
 
         preferences = getSharedPreferences(PREFERENCE, MODE_PRIVATE);
+
+        auth = FirebaseAuth.getInstance();
 
         Log.i(CLASS, "onCreate");
     }
 
 
     public void login(View view) {
-        String userName = userNameEditText.getText().toString();
+        String userEmail = userEmailEditText.getText().toString();
         String password = passwordEditText.getText().toString();
 
-        Log.i(CLASS, "Felhasználónév: " + userName + ", jelszó: " + password);
+        //Log.i(CLASS, "Email: " + userEmail + ", jelszó: " + password);
+
+        auth.signInWithEmailAndPassword(userEmail, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    Log.d(CLASS, "A felhasználó sikeresen belépve");
+                    startShoplist();
+                } else {
+                    Log.d(CLASS, "A felhasználó belépése sikertelen");
+                    Toast.makeText(MainActivity.this, "A felhasználó belépése sikertelen: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
+    private void startShoplist(){
+        Intent intent = new Intent(this, ShopListActivity.class);
+        //intent.putExtra("KEY", KEY);
+        startActivity(intent);
     }
 
     public void register(View view) {
@@ -47,6 +76,22 @@ public class MainActivity extends AppCompatActivity {
         //TODO
         startActivity(intent);
     }
+
+    public void guestLogin(View view) {
+        auth.signInAnonymously().addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    Log.d(CLASS, "A vendég felhasználó sikeresen belépve");
+                    startShoplist();
+                } else {
+                    Log.d(CLASS, "A vendég felhasználó belépése sikertelen");
+                    Toast.makeText(MainActivity.this, "A vendég felhasználó belépése sikertelen: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+    }
+
 
     @Override
     protected void onStart() {
@@ -71,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("userName", userNameEditText.getText().toString());
+        editor.putString("userEmail", userEmailEditText.getText().toString());
         editor.putString("password", passwordEditText.getText().toString());
         editor.apply();
 
