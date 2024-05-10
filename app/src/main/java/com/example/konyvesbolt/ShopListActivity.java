@@ -18,10 +18,17 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
@@ -39,6 +46,8 @@ public class ShopListActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private ArrayList<ShoppingItem> mItemsData;
     private ShopingItemAdapter mAdapter;
+    private FirebaseFirestore mFirestore;
+    private CollectionReference mItems;
 
     private SharedPreferences preferences;
 
@@ -64,8 +73,29 @@ public class ShopListActivity extends AppCompatActivity {
         mAdapter = new ShopingItemAdapter(this, mItemsData);
         mRecyclerView.setAdapter(mAdapter);
 
+        mFirestore = FirebaseFirestore.getInstance();
+        mItems = mFirestore.collection("Items");
+        queryData();
+
         initializeData();
     }
+
+    private void queryData() {
+        mItemsData.clear();
+        mItems.orderBy("name").limit(10).get().addOnSuccessListener(queryDocumentSnapshots -> {
+            for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                ShoppingItem item = document.toObject(ShoppingItem.class);
+                mItemsData.add(item);
+            }
+
+            if (mItemsData.size() == 0) {
+                initializeData();
+                queryData();
+            }
+            mAdapter.notifyDataSetChanged();
+        });
+    }
+
 
     private void initializeData() {
         String[] itemsList = getResources().getStringArray(R.array.item_titles);
@@ -74,17 +104,19 @@ public class ShopListActivity extends AppCompatActivity {
         TypedArray itemsImageResource = getResources().obtainTypedArray(R.array.item_images);
         TypedArray itemsRate = getResources().obtainTypedArray(R.array.item_rates);
 
-        mItemsData.clear();
-
         for (int i = 0; i < itemsList.length; i++){
-            mItemsData.add(new ShoppingItem(itemsList[i], itemsSubtitle[i], itemsPrice[i], itemsRate.getFloat(i, 0), itemsImageResource.getResourceId(i, 0)));
+            mItems.add(new ShoppingItem(
+                    itemsList[i],
+                    itemsSubtitle[i],
+                    itemsPrice[i],
+                    itemsRate.getFloat(i, 0),
+                    itemsImageResource.getResourceId(i, 0)));
         }
 
         itemsImageResource.recycle();
 
-        mAdapter.notifyDataSetChanged();
-
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

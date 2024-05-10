@@ -5,7 +5,7 @@ public class ShoppingItem {
     private String subtitle;
     private String prize;
     private float ratedInfo;
-    private final int imageResource;
+    private int imageResource;
 
     public ShoppingItem(String name, String subtitle, String prize, float ratedInfo, int imageResource) {
         this.name = name;
@@ -13,6 +13,9 @@ public class ShoppingItem {
         this.prize = prize;
         this.ratedInfo = ratedInfo;
         this.imageResource = imageResource;
+    }
+
+    public ShoppingItem() {
     }
 
     public String getName() {
