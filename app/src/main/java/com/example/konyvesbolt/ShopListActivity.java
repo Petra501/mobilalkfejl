@@ -6,6 +6,8 @@ import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.os.Bundle;
@@ -74,15 +76,14 @@ public class ShopListActivity extends AppCompatActivity {
         mRecyclerView.setAdapter(mAdapter);
 
         mFirestore = FirebaseFirestore.getInstance();
-        mItems = mFirestore.collection("Items");
+        mItems = mFirestore.collection("Konyvek");
         queryData();
 
-        initializeData();
     }
 
     private void queryData() {
         mItemsData.clear();
-        mItems.orderBy("name").limit(10).get().addOnSuccessListener(queryDocumentSnapshots -> {
+        mItems.orderBy("name").limit(12).get().addOnSuccessListener(queryDocumentSnapshots -> {
             for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                 ShoppingItem item = document.toObject(ShoppingItem.class);
                 mItemsData.add(item);
