@@ -2,13 +2,15 @@ package com.example.konyvesbolt;
 
 public class ShoppingItem {
     private String name;
-    private String info;
+    private String subtitle;
+    private String prize;
     private float ratedInfo;
     private final int imageResource;
 
-    public ShoppingItem(String name, String info, float ratedInfo, int imageResource) {
+    public ShoppingItem(String name, String subtitle, String prize, float ratedInfo, int imageResource) {
         this.name = name;
-        this.info = info;
+        this.subtitle = subtitle;
+        this.prize = prize;
         this.ratedInfo = ratedInfo;
         this.imageResource = imageResource;
     }
@@ -17,8 +19,12 @@ public class ShoppingItem {
         return name;
     }
 
-    public String getInfo() {
-        return info;
+    public String getSubtitle() {
+        return subtitle;
+    }
+
+    public String getPrize() {
+        return prize;
     }
 
     public float getRatedInfo() {

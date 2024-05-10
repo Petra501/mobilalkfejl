@@ -16,6 +16,10 @@
     <string name="itemTitle">Ez item cím</string>
     <string name="subtitle">Ez leírás</string>
     <string name="addToChart">Kosárba</string>
+    <string name="search">Keresés</string>
+    <string name="cart">Kosár</string>
+    <string name="settings">Beállítások</string>
+    <string name="logout">Kijelentkezés</string>
     <string-array name="phoneType">
         <item>Mobil</item>
         <item>Munkahelyi</item>
@@ -23,4 +27,80 @@
         <item>Elsődleges</item>
         <item>Személyhívó</item>
     </string-array>
+
+    <string-array name="item_titles">
+        <item>Ahol a folyami rákok énekelnek</item>
+        <item>Éjkorona</item>
+        <item>Angyalok és démonok</item>
+        <item>Verity</item>
+        <item>A kívülálló</item>
+        <item>A titokzatos Kék Vonat</item>
+        <item>A harmadik titok</item>
+        <item>A szerelem képlete</item>
+        <item>Halál a Níluson</item>
+        <item>Majdnem gyönyörű</item>
+        <item>Minden tökéletes</item>
+        <item>Gallant</item>
+    </string-array>
+
+    <string-array name="item_subtitles">
+        <item>Lenyűgöző regény, amely egyszerre fordulatos krimi, érzékeny fejlődésregény, valamint a vadon és az emberi lélek természetrajza.</item>
+        <item>Izgalmas fantasy regény, amelyben Celaena, a király legveszélyesebb orgyilkosa, a könyörtelen küzdelemben legyőzi ellenfeleit.</item>
+        <item>Izgalmas thriller, amelyben Robert Langdon, a Harvard világhírű szimbólumkutatója, egy rejtélyes jelet próbál megfejteni, amelyet egy meggyilkolt fizikus mellkasába égettek.</item>
+        <item>Lenyűgöző romantikus thriller, amelyben Lowen Ashleigh, a küszködő írónő, aki anyagi csőd szélén áll, megkapja élete állásajánlatát.</item>
+        <item>Hátborzongató thriller Stephen Kingtől, amelyben Ralph Anderson nyomozó egy rejtélyes gyilkossági ügyet próbál megoldani.</item>
+        <item>Izgalmas krimi Agatha Christie-től, amelyben Hercule Poirot, a világ leghíresebb magándetektívje, egy rejtélyes gyilkossági ügyet próbál megoldani.</item>
+        <item>Izgalmas regény Steve Berry tollából, amelyben a Szűzanya súlyos titkokat bíz egy kislányra Portugáliában, 1917-ben.</item>
+        <item>Izgalmas romantikus regény, amelyben Olive Smith, a harmadéves doktorandusz hallgató, aki nem hisz a tartós romantikus kapcsolatokban, pánikba esik és megcsókolja az első férfit, akit meglát.</item>
+        <item>Izgalmas krimi Agatha Christie-től, amelyben Hercule Poirot, a világhírű magándetektív, egy rejtélyes gyilkossági ügyet próbál megoldani.</item>
+        <item>Ez a könyv, Jamie McGuire tollából, a “Gyönyörű sorscsapás” sorozat harmadik része.</item>
+        <item>Ez a könyv, Colleen Hoover tollából, egy elgondolkodtató regény egy párkapcsolati gondokkal küzdő párról, akiknek múltbéli ígéreteken múlik a jövője.</item>
+        <item>Ez a könyv, V. E. Schwab tollából, egy izgalmas és misztikus történet Olivia Priorról, aki egész életében azon tűnődött, ki ő valójában és hova tartozik.</item>
+    </string-array>
+
+    <string-array name="item_rates">
+        <item>5</item>
+        <item>4.5</item>
+        <item>4</item>
+        <item>4.5</item>
+        <item>3.5</item>
+        <item>4</item>
+        <item>5</item>
+        <item>3</item>
+        <item>4</item>
+        <item>2.5</item>
+        <item>1.5</item>
+        <item>3</item>
+    </string-array>
+
+    <string-array name="item_images">
+        <item>@drawable/folyamirak</item>
+        <item>@drawable/ejkorona</item>
+        <item>@drawable/angyalokesdemonok</item>
+        <item>@drawable/verity</item>
+        <item>@drawable/kivulallo</item>
+        <item>@drawable/kekvonat</item>
+        <item>@drawable/harmadiktitok</item>
+        <item>@drawable/szerelemkeplete</item>
+        <item>@drawable/halalaniluson</item>
+        <item>@drawable/majdnemgyonyoru</item>
+        <item>@drawable/mindentokeletes</item>
+        <item>@drawable/gallant</item>
+    </string-array>
+
+    <string-array name="item_price">
+        <item>4999 Ft</item>
+        <item>4599 Ft</item>
+        <item>5990 Ft</item>
+        <item>5990 Ft</item>
+        <item>4699 Ft</item>
+        <item>3699 Ft</item>
+        <item>3992 Ft</item>
+        <item>4999 Ft</item>
+        <item>3999 Ft</item>
+        <item>4999 Ft</item>
+        <item>3899 Ft</item>
+        <item>3980 Ft</item>
+    </string-array>
+
 </resources>
