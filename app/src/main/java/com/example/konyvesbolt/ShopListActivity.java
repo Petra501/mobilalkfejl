@@ -88,60 +88,39 @@ public class ShopListActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.list_menu, menu);
-        MenuItem menuItem = menu.findItem(R.id.searchBar);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String s) {
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String s) {
-                Log.d(CLASS, s);
-                mAdapter.getFilter().filter(s);
-                return false;
-            }
-        });
+        getMenuInflater().inflate(R.menu.new_menu, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.settings) {
-            // Itt tedd meg a Settings menüpont működését
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.settings) {
+            Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
             return true;
+        } else if (item.getItemId() == R.id.logout) {
+            FirebaseAuth.getInstance().signOut();
+            finish();
+            return true;
+        } else if (item.getItemId() == R.id.view) {
+            if (viewRow) {
+                changeSpanCount(item, R.drawable.ic_baseline_view_module_24, 1);
+            } else {
+                changeSpanCount(item, R.drawable.ic_baseline_view_stream_24, 2);
+            }
+            return true;
+        } else if (item.getItemId() == R.id.cart) {
+            Toast.makeText(this, "Cart clicked", Toast.LENGTH_SHORT).show();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
         }
-
-        return super.onOptionsItemSelected(item);
     }
+
     private void changeSpanCount(MenuItem item, int drawableId, int spanCount) {
         viewRow = !viewRow;
         item.setIcon(drawableId);
         GridLayoutManager layoutManager = (GridLayoutManager) mRecyclerView.getLayoutManager();
         layoutManager.setSpanCount(spanCount);
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        final MenuItem alertMenuItem = menu.findItem(R.id.cart);
-        FrameLayout frameLayout = (FrameLayout) alertMenuItem.getActionView();
-
-        redCircle = (FrameLayout) frameLayout.findViewById(R.id.viewRedCircleFrameLayout);
-        countTextView = (TextView) frameLayout.findViewById(R.id.viewAlertCountTextview);
-
-        frameLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onOptionsItemSelected(alertMenuItem);
-            }
-        });
-
-        return super.onPrepareOptionsMenu(menu);
     }
 
     public void updateAlertIcon(){

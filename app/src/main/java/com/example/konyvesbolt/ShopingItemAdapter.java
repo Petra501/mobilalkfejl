@@ -123,7 +123,7 @@ public class ShopingItemAdapter extends RecyclerView.Adapter<ShopingItemAdapter.
             priceTextView.setText(item.getPrize());
             ratingBar.setRating(item.getRatedInfo());
 
-            imageView.getLayoutParams().height = 600; // Kívánt magasság
+            imageView.getLayoutParams().height = 600;
 
             Glide.with(mContext)
                     .load(item.getImageResource())
