@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -23,6 +26,9 @@ public class CartActivity extends AppCompatActivity {
     private TextView mtextView;
     private CartItemAdapter mAdapter;
     private int totalPrize = 0;
+    private int piece = 0;
+
+    private NotificationHelper mNotificationHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +38,7 @@ public class CartActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         int key = getIntent().getIntExtra("KEY", 0);
+
 
         if (key != 44) {
             finish();
@@ -45,6 +52,9 @@ public class CartActivity extends AppCompatActivity {
 
         mAdapter = new CartItemAdapter(this, cartItems);
         mRecyclerView.setAdapter(mAdapter);
+
+        mNotificationHelper = new NotificationHelper(this);
+
     }
 
     private ArrayList<ShoppingItem> getCartItems() {
@@ -55,6 +65,7 @@ public class CartActivity extends AppCompatActivity {
 
         itemsRef.get().addOnSuccessListener(queryDocumentSnapshots -> {
             int totalPrice = 0;
+            int piece_counter = 0;
             for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                 ShoppingItem item = document.toObject(ShoppingItem.class);
 
@@ -67,11 +78,14 @@ public class CartActivity extends AppCompatActivity {
 
                 totalPrice += actuallyPrize;
 
+                piece_counter += cartedCount;
+
                 if (cartedCount > 0) {
                     cartItems.add(item);
                 }
             }
             totalPrize = totalPrice;
+            piece = piece_counter;
             mtextView.setText(totalPrize + " Ft");
             mAdapter.notifyDataSetChanged();
         }).addOnFailureListener(e -> {
@@ -79,5 +93,9 @@ public class CartActivity extends AppCompatActivity {
         });
 
         return cartItems;
+    }
+
+    public void order(View view) {
+        mNotificationHelper.send(String.valueOf(piece));
     }
 }

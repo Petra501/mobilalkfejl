@@ -53,7 +53,6 @@ public class ShopListActivity extends AppCompatActivity {
     private ShopingItemAdapter mAdapter;
     private FirebaseFirestore mFirestore;
     private CollectionReference mItems;
-
     private SharedPreferences preferences;
 
     private boolean viewRow = true;
