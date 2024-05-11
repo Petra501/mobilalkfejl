@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="100dp"
-    android:paddingTop="40dp"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp"
     tools:context=".ShopListActivity">
 
     <androidx.recyclerview.widget.RecyclerView

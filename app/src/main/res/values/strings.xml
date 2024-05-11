@@ -20,6 +20,7 @@
     <string name="cart">Kosár</string>
     <string name="settings">Beállítások</string>
     <string name="logout">Kijelentkezés</string>
+    <string name="delete">Törlés</string>
     <string-array name="phoneType">
         <item>Mobil</item>
         <item>Munkahelyi</item>

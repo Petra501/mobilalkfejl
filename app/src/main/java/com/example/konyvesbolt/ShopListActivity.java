@@ -25,7 +25,9 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
 import java.util.ArrayList;
@@ -83,9 +85,10 @@ public class ShopListActivity extends AppCompatActivity {
 
     private void queryData() {
         mItemsData.clear();
-        mItems.orderBy("name").limit(12).get().addOnSuccessListener(queryDocumentSnapshots -> {
+        mItems.orderBy("cartedCount", Query.Direction.DESCENDING).limit(12).get().addOnSuccessListener(queryDocumentSnapshots -> {
             for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                 ShoppingItem item = document.toObject(ShoppingItem.class);
+                item.setId(document.getId());
                 mItemsData.add(item);
             }
 
@@ -97,6 +100,21 @@ public class ShopListActivity extends AppCompatActivity {
         });
     }
 
+
+    public void deleteItem(ShoppingItem item) {
+        DocumentReference ref = mItems.document(item._getId());
+        ref.delete()
+                .addOnSuccessListener(success -> {
+                    Toast.makeText(this, item._getId() +" könyv sikeresen törölve.", Toast.LENGTH_LONG).show();
+
+                })
+                .addOnFailureListener(fail -> {
+                    Toast.makeText(this, item._getId() +" könyv törlése sikertelen.", Toast.LENGTH_LONG).show();
+                });
+
+        queryData();
+        //mNotificationHelper.cancel();
+    }
 
     private void initializeData() {
         String[] itemsList = getResources().getStringArray(R.array.item_titles);
@@ -111,7 +129,7 @@ public class ShopListActivity extends AppCompatActivity {
                     itemsSubtitle[i],
                     itemsPrice[i],
                     itemsRate.getFloat(i, 0),
-                    itemsImageResource.getResourceId(i, 0)));
+                    itemsImageResource.getResourceId(i, 0), 0));
         }
 
         itemsImageResource.recycle();
@@ -173,15 +191,15 @@ public class ShopListActivity extends AppCompatActivity {
         layoutManager.setSpanCount(spanCount);
     }
 
-    public void updateAlertIcon(){
-        cartItems = (cartItems + 1);
-        if (0 < cartItems){
-            countTextView.setText(String.valueOf(cartItems));
-        } else {
-            countTextView.setText("");
-        }
+    public void updateAlertIcon(ShoppingItem item){
 
-        redCircle.setVisibility((cartItems > 0) ? VISIBLE : GONE);
+        mItems.document(item._getId()).update("cartedCount", item.getCartedCount() + 1)
+                .addOnFailureListener(fail -> {
+                    Toast.makeText(this, item._getId() +" könyv módosítása sikertelen.", Toast.LENGTH_LONG).show();
+                });
+
+        //mNotificationHelper.send(item.getName());
+        queryData();
 
     }
 

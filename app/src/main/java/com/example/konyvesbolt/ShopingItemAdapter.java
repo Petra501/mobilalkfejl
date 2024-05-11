@@ -12,12 +12,12 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
@@ -108,13 +108,7 @@ public class ShopingItemAdapter extends RecyclerView.Adapter<ShopingItemAdapter.
             imageView = itemView.findViewById(R.id.itemImage);
             ratingBar = itemView.findViewById(R.id.ratingBar);
 
-            itemView.findViewById(R.id.addToCartButton).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d(CLASS, "Kosárba gomb megnyomva");
-                    ((ShopListActivity)mContext).updateAlertIcon();
-                }
-            });
+
         }
 
         public void bindTo(ShoppingItem item) {
@@ -128,6 +122,22 @@ public class ShopingItemAdapter extends RecyclerView.Adapter<ShopingItemAdapter.
             Glide.with(mContext)
                     .load(item.getImageResource())
                     .into(imageView);
+
+            itemView.findViewById(R.id.addToCartButton).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(CLASS, "Kosárba gomb megnyomva");
+                    ((ShopListActivity)mContext).updateAlertIcon(item);
+                }
+            });
+
+            itemView.findViewById(R.id.deleteButton).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(CLASS, "Törlés gomb megnyomva");
+                    ((ShopListActivity)mContext).deleteItem(item);
+                }
+            });
         }
     }
 }
