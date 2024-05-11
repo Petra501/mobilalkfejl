@@ -40,6 +40,7 @@ import static android.view.View.VISIBLE;
 public class ShopListActivity extends AppCompatActivity {
 
     private static final String CLASS = ShopListActivity.class.getName();
+    private static final int KEY = 44;
     private FirebaseUser user;
     private FirebaseAuth auth;
 
@@ -113,7 +114,6 @@ public class ShopListActivity extends AppCompatActivity {
                 });
 
         queryData();
-        //mNotificationHelper.cancel();
     }
 
     private void initializeData() {
@@ -177,11 +177,18 @@ public class ShopListActivity extends AppCompatActivity {
             }
             return true;
         } else if (item.getItemId() == R.id.cart) {
-            Toast.makeText(this, "Cart clicked", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, "Cart clicked", Toast.LENGTH_SHORT).show();
+            startCartActivity();
             return true;
         } else {
             return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void startCartActivity(){
+        Intent intent = new Intent(this, CartActivity.class);
+        intent.putExtra("KEY", KEY);
+        startActivity(intent);
     }
 
     private void changeSpanCount(MenuItem item, int drawableId, int spanCount) {
@@ -191,6 +198,7 @@ public class ShopListActivity extends AppCompatActivity {
         layoutManager.setSpanCount(spanCount);
     }
 
+    //TODO: notification
     public void updateAlertIcon(ShoppingItem item){
 
         mItems.document(item._getId()).update("cartedCount", item.getCartedCount() + 1)
@@ -198,7 +206,17 @@ public class ShopListActivity extends AppCompatActivity {
                     Toast.makeText(this, item._getId() +" könyv módosítása sikertelen.", Toast.LENGTH_LONG).show();
                 });
 
-        //mNotificationHelper.send(item.getName());
+        queryData();
+
+    }
+
+    public void updateCart(ShoppingItem item){
+
+        mItems.document(item._getId()).update("cartedCount", 0)
+                .addOnFailureListener(fail -> {
+                    Toast.makeText(this, item._getId() +" könyv módosítása sikertelen.", Toast.LENGTH_LONG).show();
+                });
+
         queryData();
 
     }

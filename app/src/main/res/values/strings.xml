@@ -21,6 +21,12 @@
     <string name="settings">Beállítások</string>
     <string name="logout">Kijelentkezés</string>
     <string name="delete">Törlés</string>
+    <string name="totalPrizeSubtitle">Teljes összeg:</string>
+    <string name="totalPrize">10 Ft</string>
+    <string name="order">Rendelés</string>
+    <string name="orderSubtitle">Kosár tartalma</string>
+    <string name="bookTitle">Könyv címe</string>
+    <string name="bookPrize">Könyv ára</string>
     <string-array name="phoneType">
         <item>Mobil</item>
         <item>Munkahelyi</item>
