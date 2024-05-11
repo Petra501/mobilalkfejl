@@ -63,7 +63,6 @@
             android:layout_centerHorizontal="true"/>
 
 
-
         <Button
             android:id="@+id/addToCartButton"
             android:layout_width="wrap_content"
@@ -80,6 +79,15 @@
             android:layout_below="@+id/addToCartButton"
             android:fontFamily="casual"
             android:text="@string/delete"
+            android:layout_centerHorizontal="true"/>
+
+        <Button
+            android:id="@+id/clearCartButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/deleteButton"
+            android:fontFamily="casual"
+            android:text="@string/clearCart"
             android:layout_centerHorizontal="true"/>
 
 

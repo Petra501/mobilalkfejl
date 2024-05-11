@@ -12,7 +12,6 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,7 +45,7 @@ public class ShopingItemAdapter extends RecyclerView.Adapter<ShopingItemAdapter.
         holder.bindTo(item);
 
         if(holder.getAdapterPosition() > lastPosition){
-            Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.slide_in_row);
+            Animation animation = AnimationUtils.loadAnimation(mContext, R.anim.right_row);
             holder.imageView.startAnimation(animation);
             lastPosition = holder.getAdapterPosition();
         }
@@ -128,6 +127,14 @@ public class ShopingItemAdapter extends RecyclerView.Adapter<ShopingItemAdapter.
                 public void onClick(View v) {
                     Log.d(CLASS, "Kosárba gomb megnyomva");
                     ((ShopListActivity)mContext).updateAlertIcon(item);
+                }
+            });
+
+            itemView.findViewById(R.id.clearCartButton).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(CLASS, "Kosárból gomb megnyomva");
+                    ((ShopListActivity)mContext).updateCart(item);
                 }
             });
 

@@ -29,6 +29,8 @@ public class CartActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cart_dialog);
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         int key = getIntent().getIntExtra("KEY", 0);
 
         if (key != 44) {

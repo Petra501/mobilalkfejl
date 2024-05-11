@@ -66,7 +66,6 @@ public class ShopListActivity extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
         if(user != null){
             Log.d(CLASS, "Hiteles felhasználó!");
-            Toast.makeText(ShopListActivity.this, "Sikeres belépés", Toast.LENGTH_LONG).show();
         } else {
             Log.d(CLASS, "Nem hiteles felhasználó!");
             finish();
@@ -86,7 +85,7 @@ public class ShopListActivity extends AppCompatActivity {
 
     private void queryData() {
         mItemsData.clear();
-        mItems.orderBy("cartedCount", Query.Direction.DESCENDING).limit(12).get().addOnSuccessListener(queryDocumentSnapshots -> {
+        mItems.limit(12).get().addOnSuccessListener(queryDocumentSnapshots -> {
             for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
                 ShoppingItem item = document.toObject(ShoppingItem.class);
                 item.setId(document.getId());
@@ -162,10 +161,7 @@ public class ShopListActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.settings) {
-            Toast.makeText(this, "Settings clicked", Toast.LENGTH_SHORT).show();
-            return true;
-        } else if (item.getItemId() == R.id.logout) {
+        if (item.getItemId() == R.id.logout) {
             FirebaseAuth.getInstance().signOut();
             finish();
             return true;

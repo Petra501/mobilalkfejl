@@ -21,6 +21,8 @@ import java.util.ArrayList;
 
 public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHolder> {
     private static final String CLASS = ShopingItemAdapter.class.getName();
+    private int lastPosition = -1;
+
 
     private Context context;
     private ArrayList<ShoppingItem> items;
@@ -53,6 +55,14 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.ViewHo
         holder.itemPrizeEachTextView.setText(""+count);
 
 
+        if(holder.getAdapterPosition() > lastPosition){
+            Animation animation = AnimationUtils.loadAnimation(context, R.anim.left_row);
+            holder.itemTitleTextView.startAnimation(animation);
+            holder.itemPrizeTextView.startAnimation(animation);
+            holder.itemPrizeEachTextView.startAnimation(animation);
+            holder.itemQuantityTextView.startAnimation(animation);
+            lastPosition = holder.getAdapterPosition();
+        }
 
     }
 

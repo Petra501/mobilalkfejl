@@ -18,7 +18,7 @@
     <string name="addToChart">Kosárba</string>
     <string name="search">Keresés</string>
     <string name="cart">Kosár</string>
-    <string name="settings">Beállítások</string>
+    <string name="clearCart">Kivétel a kosárból</string>
     <string name="logout">Kijelentkezés</string>
     <string name="delete">Törlés</string>
     <string name="totalPrizeSubtitle">Teljes összeg:</string>
