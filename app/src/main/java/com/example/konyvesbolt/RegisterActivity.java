@@ -157,6 +157,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-        //TODO: kiválaszott spiner item üres
+        //TODO
     }
 }

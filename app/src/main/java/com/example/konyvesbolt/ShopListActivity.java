@@ -214,7 +214,6 @@ public class ShopListActivity extends AppCompatActivity {
         layoutManager.setSpanCount(spanCount);
     }
 
-    //TODO: notification
     public void updateAlertIcon(ShoppingItem item){
 
         mItems.document(item._getId()).update("cartedCount", item.getCartedCount() + 1)

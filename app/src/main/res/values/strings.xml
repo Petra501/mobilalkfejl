@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Könyvesbolt</string>
+    <string name="app_name">Paging Park</string>
     <string name="name">Felhasználónév</string>
     <string name="password">Jelszó</string>
     <string name="login">Bejelentkezés</string>

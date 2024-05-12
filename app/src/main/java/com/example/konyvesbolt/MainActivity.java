@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
     public void register(View view) {
         Intent intent = new Intent(this, RegisterActivity.class);
         intent.putExtra("KEY", KEY);
-        //TODO
         startActivity(intent);
     }
 
@@ -97,7 +96,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         Log.i(CLASS, "onStart");
-        //TODO: Az onStart és egyéb life ciklusos logolásait ki kell szedni
     }
 
     @Override
