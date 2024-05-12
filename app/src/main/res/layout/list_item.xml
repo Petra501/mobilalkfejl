@@ -1,33 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="8dp">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="15dp"
+    android:background="@drawable/card_background"
+    android:elevation="4dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        
+        android:layout_height="match_parent"
+        android:background="@color/login">
+
         <ImageView
             android:id="@+id/itemImage"
-            android:paddingTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:adjustViewBounds="true"/>
+            android:adjustViewBounds="true"
+            android:paddingTop="50dp" />
 
         <TextView
             android:id="@+id/prizeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/itemImage"
+            android:layout_centerHorizontal="true"
             android:layout_marginBottom="12dp"
+            android:fontFamily="casual"
             android:padding="8dp"
             android:text="Ár"
             android:textColor="@color/black"
-            android:fontFamily="casual"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_centerHorizontal="true"/>
+            android:textStyle="bold" />
 
         <RatingBar
             android:id="@+id/ratingBar"
@@ -35,22 +40,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/prizeTextView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="0dp"
             android:isIndicator="true"
-            android:numStars="5"
-            android:layout_marginStart="8dp"
-            android:layout_centerHorizontal="true"/>
-    
+            android:numStars="5" />
+
         <TextView
             android:id="@+id/titleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/ratingBar"
+            android:layout_centerHorizontal="true"
             android:padding="8dp"
             android:text="@string/itemTitle"
-            android:textSize="16sp"
             android:textColor="@color/black"
-            android:layout_centerHorizontal="true"/>
+            android:textSize="16sp" />
 
 
         <TextView
@@ -58,9 +63,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/titleTextView"
+            android:layout_centerHorizontal="true"
             android:padding="8dp"
-            android:text="@string/subtitle"
-            android:layout_centerHorizontal="true"/>
+            android:text="@string/subtitle" />
 
 
         <Button
@@ -68,27 +73,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/subtitleTextView"
+            android:layout_centerHorizontal="true"
             android:fontFamily="casual"
-            android:text="@string/addToChart"
-            android:layout_centerHorizontal="true"/>
+            android:text="@string/addToChart" />
 
         <Button
             android:id="@+id/deleteButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/addToCartButton"
+            android:layout_centerHorizontal="true"
             android:fontFamily="casual"
-            android:text="@string/delete"
-            android:layout_centerHorizontal="true"/>
+            android:text="@string/delete" />
 
         <Button
             android:id="@+id/clearCartButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/deleteButton"
+            android:layout_centerHorizontal="true"
             android:fontFamily="casual"
-            android:text="@string/clearCart"
-            android:layout_centerHorizontal="true"/>
+            android:text="@string/clearCart" />
 
 
     </RelativeLayout>
