@@ -33,7 +33,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     EditText passwordEditText;
     EditText passwordAgainEditText;
     EditText phoneEditText;
-   RadioGroup userTypeGroup;
     Spinner phoneSpinner;
 
     @Override
@@ -53,8 +52,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         passwordAgainEditText = findViewById(R.id.passwordAgainEditText);
         phoneEditText = findViewById(R.id.phoneEditText);
         phoneSpinner = findViewById(R.id.phoneSpinner);
-        userTypeGroup = findViewById(R.id.userTypeGroup);
-        userTypeGroup.check(R.id.buyerRadioButton);
 
         preferences = getSharedPreferences(PREFERENCE, MODE_PRIVATE);
         String userEmail = preferences.getString("userEmail", "");
@@ -88,17 +85,13 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         String phone = phoneEditText.getText().toString();
         String phoneType = phoneSpinner.getSelectedItem().toString();
 
-        int checkedId = userTypeGroup.getCheckedRadioButtonId();
-        RadioButton radioButton = userTypeGroup.findViewById(checkedId);
-        String userType = radioButton.getText().toString();
-
         if (!password.equals(passwordAgain)){
             Log.e(CLASS, "A jelszó és megerősítése nem egyezik!");
             return;
         }
 
 
-       //Log.i(CLASS, "Regisztrált: " + userName + ", Email: " + userEmail + ", tel.típus: " + phoneType + ", telefon: " + phone + ", típus: " + userType);
+       //Log.i(CLASS, "Regisztrált: " + userName + ", Email: " + userEmail + ", tel.típus: " + phoneType + ", telefon: " + phone);
 
         auth.createUserWithEmailAndPassword(userEmail, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
@@ -108,7 +101,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                     startShoplist();
                 } else {
                     Log.d(CLASS, "A felhasználó regisztrálása sikertelen");
-                    Toast.makeText(RegisterActivity.this, "A felhasználó regisztrálása sikertelen: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this, "A felhasználó regisztrálása sikertelen", Toast.LENGTH_LONG).show();
                 }
             }
         });

@@ -135,7 +135,6 @@ public class ShopListActivity extends AppCompatActivity {
     }
 
 
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.new_menu, menu);
@@ -143,18 +142,40 @@ public class ShopListActivity extends AppCompatActivity {
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
-            public boolean onQueryTextSubmit(String s) {
+            public boolean onQueryTextSubmit(String query) {
                 return false;
             }
 
             @Override
-            public boolean onQueryTextChange(String s) {
-                Log.d(CLASS, s);
-                mAdapter.getFilter().filter(s);
-                return false;
+            public boolean onQueryTextChange(String newText) {
+                if (newText.isEmpty()) {
+                    // Ha a keresési mező üres, akkor visszaállíthatod az eredeti listát
+                    queryData();
+                } else {
+                    // Keresés a Firestore adatbázisban
+                    searchBooks(newText);
+                }
+                return true;
             }
         });
         return true;
+    }
+
+    private void searchBooks(String searchText) {
+        mItemsData.clear();
+        mItems.whereEqualTo("name", searchText)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        ShoppingItem item = document.toObject(ShoppingItem.class);
+                        item.setId(document.getId());
+                        mItemsData.add(item);
+                    }
+                    mAdapter.notifyDataSetChanged();
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(CLASS, "Error searching books: ", e);
+                });
     }
 
 

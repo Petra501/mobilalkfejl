@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     startShoplist();
                 } else {
                     Log.d(CLASS, "A felhasználó belépése sikertelen");
-                    Toast.makeText(MainActivity.this, "A felhasználó belépése sikertelen: " + task.getException().getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "A felhasználó belépése sikertelen", Toast.LENGTH_LONG).show();
                 }
             }
         });
